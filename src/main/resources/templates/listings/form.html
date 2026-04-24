@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${pageTitle}">Форма объявления</title>
+</head>
+<body>
+<h1 th:text="${pageTitle}">Форма объявления</h1>
+
+<p>
+    <a th:href="@{/listings}">Назад к списку</a>
+</p>
+
+<form th:object="${listingForm}"
+      th:action="${listingForm.id} == null ? @{/listings} : @{'/listings/' + ${listingForm.id}}"
+      method="post">
+
+    <p>
+        <label for="title">Название:</label><br>
+        <input id="title" type="text" th:field="*{title}">
+        <br>
+        <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
+    </p>
+
+    <p>
+        <label for="category">Категория:</label><br>
+        <input id="category" type="text" th:field="*{category}">
+        <br>
+        <span th:if="${#fields.hasErrors('category')}" th:errors="*{category}"></span>
+    </p>
+
+    <p>
+        <label for="ownerName">Владелец:</label><br>
+        <input id="ownerName" type="text" th:field="*{ownerName}">
+        <br>
+        <span th:if="${#fields.hasErrors('ownerName')}" th:errors="*{ownerName}"></span>
+    </p>
+
+    <p>
+        <label for="city">Город:</label><br>
+        <input id="city" type="text" th:field="*{city}">
+        <br>
+        <span th:if="${#fields.hasErrors('city')}" th:errors="*{city}"></span>
+    </p>
+
+    <p>
+        <label for="pricePerDay">Цена за день:</label><br>
+        <input id="pricePerDay" type="number" min="0" step="0.01" th:field="*{pricePerDay}">
+        <br>
+        <span th:if="${#fields.hasErrors('pricePerDay')}" th:errors="*{pricePerDay}"></span>
+    </p>
+
+    <p>
+        <label for="status">Статус:</label><br>
+        <select id="status" th:field="*{status}">
+            <option th:each="statusItem : ${statuses}"
+                    th:value="${statusItem}"
+                    th:text="${statusItem}">
+            </option>
+        </select>
+        <br>
+        <span th:if="${#fields.hasErrors('status')}" th:errors="*{status}"></span>
+    </p>
+
+    <p>
+        <label for="description">Описание:</label><br>
+        <textarea id="description" th:field="*{description}" rows="5" cols="50"></textarea>
+        <br>
+        <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
+    </p>
+
+    <p>
+        <button type="submit">Сохранить</button>
+        <a th:href="@{/listings}">Отмена</a>
+    </p>
+</form>
+</body>
+</html>

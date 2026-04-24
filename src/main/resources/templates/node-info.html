@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Информация о ноде</title>
+</head>
+<body>
+<h1>Информация о ноде</h1>
+
+<p>Эта страница нужна для лабораторной работы 4.</p>
+
+<p>
+    Текущая нода:
+    <strong th:text="${nodeName}"></strong>
+</p>
+
+<p>
+    <a th:href="@{/listings}">Вернуться к объявлениям</a>
+</p>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Объявления</title>
+</head>
+<body>
+<h1>Объявления об аренде спортивного инвентаря</h1>
+
+<p>
+    <a th:href="@{/listings/new}">Добавить объявление</a>
+    |
+    <a th:href="@{/node-info}">Информация о ноде</a>
+</p>
+
+<p th:if="${successMessage}" th:text="${successMessage}"></p>
+
+<table border="1" cellpadding="5" cellspacing="0">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Название</th>
+        <th>Категория</th>
+        <th>Владелец</th>
+        <th>Город</th>
+        <th>Цена за день</th>
+        <th>Статус</th>
+        <th>Описание</th>
+        <th>Дата создания</th>
+        <th>Действия</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${#lists.isEmpty(listings)}">
+        <td colspan="10">Объявлений пока нет</td>
+    </tr>
+
+    <tr th:each="listing : ${listings}">
+        <td th:text="${listing.id}"></td>
+        <td th:text="${listing.title}"></td>
+        <td th:text="${listing.category}"></td>
+        <td th:text="${listing.ownerName}"></td>
+        <td th:text="${listing.city}"></td>
+        <td th:text="${listing.pricePerDay}"></td>
+        <td th:text="${listing.status}"></td>
+        <td th:text="${listing.description}"></td>
+        <td th:text="${listing.createdAt != null ? #temporals.format(listing.createdAt, 'dd.MM.yyyy HH:mm') : '-'}"></td>
+        <td>
+            <a th:href="@{'/listings/' + ${listing.id} + '/edit'}">Редактировать</a>
+
+            <form th:action="@{'/listings/' + ${listing.id} + '/delete'}" method="post" style="margin-top: 5px;">
+                <button type="submit">Удалить</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
