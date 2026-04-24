@@ -1,21 +1,18 @@
 package com.example.sportrental.monitoring
 
-import com.example.sportrental.config.AppInfoProperties
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping
 
 @Controller
 class NodeInfoController(
-    private val appInfoProperties: AppInfoProperties
+    @Value("\${NODE_NAME:Unknown node}") private val nodeName: String
 ) {
 
-    @GetMapping("/")
-    fun home(): String = "redirect:/listings"
-
-    @GetMapping("/node-info")
+    @GetMapping("/", "/node-info")
     fun nodeInfo(model: Model): String {
-        model.addAttribute("nodeName", appInfoProperties.nodeName)
+        model.addAttribute("nodeName", nodeName)
         return "node-info"
     }
 }
