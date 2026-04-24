@@ -11,7 +11,7 @@ data class ListingRequest(
     @field:Size(max = 120)
     val title: String,
 
-    @field:NotBlank(message = "Введите категорию")
+    @field:NotBlank(message = "Введите ")
     @field:Size(max = 60)
     val category: String,
 
