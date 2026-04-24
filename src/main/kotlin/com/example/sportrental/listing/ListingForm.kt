@@ -9,7 +9,7 @@ import java.math.BigDecimal
 data class ListingForm(
     var id: Long? = null,
 
-    @field:NotBlank(message = "Введите название инвентаря")
+    @field:NotBlank(message = " название инвентаря")
     @field:Size(max = 120)
     var title: String = "",
 
